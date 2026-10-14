@@ -32,13 +32,18 @@ const candidates = () => execFileSync('git', ['ls-files', '--cached', '--others'
   .filter(Boolean);
 
 /** a NUL byte in the head of a file means it is not source or text */
-function isBinary(file) {
+function isBinary(entry) {
+  const file = path.join(ROOT, entry);
+  // git reports an untracked nested repository as a single directory entry, and a symlink is not
+  // content of ours either: neither is a file to read, and neither must crash the guard
+  try { if (!fs.lstatSync(file).isFile()) return false; } catch { return false; }
+
   let fd;
-  try { fd = fs.openSync(path.join(ROOT, file), 'r'); } catch { return false; }
+  try { fd = fs.openSync(file, 'r'); } catch { return false; }
   try {
     const buf = Buffer.alloc(8192);
-    const n = fs.readSync(fd, buf, 0, buf.length, 0);
-    return buf.subarray(0, n).includes(0);
+    const read = fs.readSync(fd, buf, 0, buf.length, 0);
+    return buf.subarray(0, read).includes(0);
   } finally {
     fs.closeSync(fd);
   }
@@ -58,7 +63,9 @@ describe('no Pokémon assets in git', () => {
 
   it('.gitignore keeps the fetched and generated trees out of git', () => {
     for (const p of ['.cache/assets/pokedex.json', '.cache/pokecrystal/gfx/font/font.png', 'artifacts/demo/demo.gif', 'node_modules/ws/index.js']) {
-      const { status } = spawnSync('git', ['check-ignore', '-q', '--no-index', p], { cwd: ROOT });
+      const { status, stderr } = spawnSync('git', ['check-ignore', '-q', '--no-index', p], { cwd: ROOT, encoding: 'utf8' });
+      // 0 is ignored and 1 is not; anything else is git failing, which must not read as a verdict
+      assert.ok(status === 0 || status === 1, `git could not answer for ${p}: ${stderr.trim()}`);
       assert.equal(status, 0, `${p} is not ignored: a fetched asset could be committed`);
     }
   });
