@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pokémon Agents</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #101418;
+    color: #9aa4b0;
+    font: 12px/1.4 ui-monospace, Menlo, monospace;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  /* the two canvases are stacked: the 160x144 screen, and the 40-column overlay above it */
+  .screen { position: relative; line-height: 0; }
+  canvas { image-rendering: pixelated; display: block; }
+  #overlay { position: absolute; inset: 0; display: none; }
+  .keys { text-align: center; }
+  kbd { color: #dfe6ee; }
+  .disclaimer {
+    max-width: 640px;
+    margin: 6px auto 0;
+    font: 11px/1.4 system-ui, sans-serif;
+    color: #8a8f98;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="screen">
+    <canvas id="game" width="160" height="144" aria-label="Pokémon Agents game screen"></canvas>
+    <canvas id="overlay" width="320" height="288" aria-hidden="true"></canvas>
+  </div>
+
+  <div class="keys">
+    <kbd>←↑↓→</kbd> move ·
+    <kbd>Z</kbd>/<kbd>Space</kbd> A ·
+    <kbd>X</kbd>/<kbd>Esc</kbd> B ·
+    <kbd>Enter</kbd> START ·
+    <kbd>D</kbd> next decision ·
+    <kbd>H</kbd> timeline ·
+    <kbd>M</kbd> map ·
+    <kbd>N</kbd> sound ·
+    <kbd>Shift</kbd> HUD
+  </div>
+
+  <p class="disclaimer">
+    A non-commercial fan project inspired by the Pokémon games. Not affiliated with or endorsed by
+    Nintendo, Game Freak, Creatures or The Pokémon Company. Pokémon names, art and sounds are
+    © their owners.
+  </p>
+
+  <script type="module" src="/js/main.mjs"></script>
+</body>
+</html>

@@ -53,6 +53,21 @@ describe('the bridge', { skip: !assetsReady && 'assets not fetched: run npm run 
   before(async () => { proc = await boot(home); });
   after(async () => { await stop(proc); });
 
+  it('serves the game at the root', async () => {
+    const res = await fetch(ORIGIN);
+    assert.equal(res.status, 200);
+    const html = await res.text();
+    assert.match(html, /<canvas id="game"/);
+    assert.match(html, /js\/main\.mjs/);
+    assert.match(res.headers.get('content-type'), /text\/html/);
+  });
+
+  it('serves the game modules as JavaScript, not as a download', async () => {
+    const res = await fetch(`${ORIGIN}/js/pixels.mjs`);
+    assert.equal(res.status, 200);
+    assert.match(res.headers.get('content-type'), /javascript/);
+  });
+
   it('serves the fetched assets, and nothing outside them', async () => {
     const dex = await fetch(`${ORIGIN}/assets/pokedex.json`);
     assert.equal(dex.status, 200);
