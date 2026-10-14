@@ -7,7 +7,7 @@
 // It never reads your real sessions: its own port, its own temp directories, its own fake `claude`.
 //   npm run e2e           -> artifacts/e2e/<when>/
 //   npm run e2e -- --real -> also screenshots your real sessions, read-only
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -80,9 +80,11 @@ hook.prompt('security review');
 hook.title('Security review');
 hook.tool('Read', { file_path: '/e2e/pocket-shop/src/cart.ts' }, { leaveOpen: true });
 
-// a goal needs a real folder inside home that is not this repo and not a temp dir
+// A goal needs a real folder inside home that is neither a temp dir nor this repository. It is made
+// a repository of its own, so it is a project in its own right rather than part of this one.
 const GOAL_LAB = path.join(ROOT, 'artifacts', 'e2e-goal-lab');
 fs.mkdirSync(GOAL_LAB, { recursive: true });
+if (!fs.existsSync(path.join(GOAL_LAB, '.git'))) execFileSync('git', ['init', '-q', GOAL_LAB]);
 const lab = transcript('goal-lab', 'eeee5555', 'cli', GOAL_LAB);
 lab.prompt('set up');
 lab.reply('Set up.');
