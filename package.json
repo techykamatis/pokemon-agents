@@ -1,0 +1,24 @@
+{
+  "name": "pokemon-agents",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Your coding agents, live, as Pokémon: a non-commercial fan project inspired by the Pokémon games. Not affiliated with Nintendo, Game Freak, Creatures or The Pokémon Company.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "setup": "git config core.hooksPath .githooks && node scripts/setup.mjs",
+    "start": "node src/server.mjs",
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "e2e": "node scripts/e2e.mjs",
+    "demo": "node scripts/demo.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.0"
+  }
+}

@@ -1,0 +1,10 @@
+# Fetched Pokémon assets live here and are never committed (see test/no-assets.test.mjs).
+.cache/
+
+# Screenshots, recordings and scratch output from the e2e and demo runs.
+artifacts/
+
+node_modules/
+*.log
+.env
+.DS_Store

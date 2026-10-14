@@ -1,0 +1,17 @@
+#!/bin/sh
+# Three things must never reach a commit: a secret, a Nintendo asset, or a red test run.
+# The asset check is a test (test/no-assets.test.mjs), so the suite covers two of the three.
+# Turned on by `npm run setup`, which points core.hooksPath here.
+set -e
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: install gitleaks first (brew install gitleaks)" >&2
+  exit 1
+fi
+gitleaks git --pre-commit --staged --redact --no-banner
+
+if ! out=$(npm test --silent 2>&1); then
+  printf '%s\n' "$out" | grep -E 'not ok|Error|expected|actual' | head -40
+  echo "pre-commit: the tests are red" >&2
+  exit 1
+fi
