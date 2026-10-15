@@ -20,14 +20,19 @@ everything that happened while you were away.
 
 ## See it
 
-`npm run demo` records a short demo from a made-up world — five invented projects at work, a goal
+<p align="center">
+  <img src="https://github.com/techykamatis/pokemon-agents/releases/download/assets/pokemon-agents-demo.gif" width="640" alt="Pokémon Agents demo: five made-up projects at work around Violet City, a goal answered on screen, an evolution, and the timeline of it all">
+</p>
+
+`npm run demo` records this short demo from a made-up world — five invented projects at work, a goal
 that asks a question and gets answered on screen, an evolution, and the timeline of it all — and
 writes it to `artifacts/demo/`. Nothing in it is real: it uses its own temp transcripts, an empty
-session registry and a stand-in for `claude`, so it never shows your own sessions.
+session registry and a stand-in for `claude`, so it never shows your own sessions. It needs `ffmpeg`.
 
-The recording is not kept in this repository, because it is a screen capture of Nintendo's artwork
-and this project does not redistribute that. Run it and the copy is yours, on your own machine.
-It needs `ffmpeg`.
+The clip above is a screen capture of Nintendo's artwork, shown here only as a fan tribute. It is
+**not committed to this repository** — it is hosted on GitHub and referenced by URL, so the tree
+stays free of game assets. Run the demo and the copy is yours, on your own machine. See the
+[disclaimer](#disclaimer).
 
 ## Run it (about two minutes)
 
