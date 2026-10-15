@@ -50,32 +50,37 @@ follows what is new. Progress is kept in `~/.pokemon-agents/`. The game is silen
 key press or click, because browsers block sound until then.
 
 <details>
-<summary><b>Keep it running (and start it at login)</b></summary>
+<summary><b>Keep it running at login — TEMPLATE, fill in before use</b></summary>
 
-`npm start` stops when its terminal closes. To keep the bridge running and start it at login, save
-this as `~/Library/LaunchAgents/com.you.pokemon-agents.plist`, fill in your paths, and load it:
+`npm start` stops when its terminal closes. To keep the bridge running and start it at login, use the
+template below. **This is a template, not a ready-to-use file — it will not run as-is.** Replace every
+`REPLACE_WITH_…` value (and `YOU` in the log paths) with your own, then save it as
+`~/Library/LaunchAgents/com.REPLACE_WITH_YOUR_NAME.pokemon-agents.plist` and load it:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- TEMPLATE: replace every REPLACE_WITH_... below (and YOU in the paths) before loading this. -->
 <plist version="1.0"><dict>
-  <key>Label</key><string>com.you.pokemon-agents</string>
-  <key>ProgramArguments</key><array><string>/path/to/node</string><string>src/server.mjs</string></array>
-  <key>WorkingDirectory</key><string>/path/to/pokemon-agents</string>
+  <key>Label</key><string>com.REPLACE_WITH_YOUR_NAME.pokemon-agents</string>
+  <key>ProgramArguments</key><array><string>REPLACE_WITH_ABSOLUTE_PATH_TO/node</string><string>src/server.mjs</string></array>
+  <key>WorkingDirectory</key><string>REPLACE_WITH_ABSOLUTE_PATH_TO/pokemon-agents</string>
   <key>EnvironmentVariables</key><dict>
-    <key>PATH</key><string><!-- your shell's $PATH, so goals can find git, node and gh --></string>
-    <key>CLAUDE_BIN</key><string><!-- the output of: command -v claude --></string>
+    <key>PATH</key><string>REPLACE_WITH_YOUR_SHELL_PATH</string><!-- your $PATH, so goals can find git, node and gh -->
+    <key>CLAUDE_BIN</key><string>REPLACE_WITH_OUTPUT_OF__command_-v_claude</string>
   </dict>
   <key>RunAtLoad</key><true/>
   <key>KeepAlive</key><true/>
-  <key>StandardOutPath</key><string>/Users/you/.pokemon-agents/bridge.log</string>
-  <key>StandardErrorPath</key><string>/Users/you/.pokemon-agents/bridge.log</string>
+  <key>StandardOutPath</key><string>/Users/YOU/.pokemon-agents/bridge.log</string>
+  <key>StandardErrorPath</key><string>/Users/YOU/.pokemon-agents/bridge.log</string>
 </dict></plist>
 ```
 
+Then load it (again with your real name in place of `REPLACE_WITH_YOUR_NAME`):
+
 ```bash
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.you.pokemon-agents.plist
-launchctl kickstart -k gui/$(id -u)/com.you.pokemon-agents   # restart after changing src/
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.REPLACE_WITH_YOUR_NAME.pokemon-agents.plist
+launchctl kickstart -k gui/$(id -u)/com.REPLACE_WITH_YOUR_NAME.pokemon-agents   # restart after changing src/
 ```
 
 Changes under `web/` only need a page reload.
