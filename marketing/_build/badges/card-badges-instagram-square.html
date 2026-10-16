@@ -1,0 +1,145 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ground:#E9F1FB; --surface:#FFFFFF; --ink:#17284A; --ink2:#3D507A; --ink3:#7686A6;
+  --accent:#2F6DB5; --gold:#F2B417; --screen:#0E1B33; --sky:#BFD9F2;
+  --serif:'Young Serif',Georgia,serif; --sans:'Hanken Grotesk',system-ui,sans-serif;
+  --mono:'Space Mono',ui-monospace,monospace; --pixel:'Press Start 2P',ui-monospace,monospace;
+}
+html,body{background:#0b1226}
+.card{position:relative; overflow:hidden; background:
+  radial-gradient(130% 100% at 100% 0%, #F3F8FE 0%, var(--ground) 55%, #DCE8F8 100%);
+  color:var(--ink); font-family:var(--sans); display:flex;}
+.card::before{content:""; position:absolute; inset:0; opacity:.5;
+  background-image:radial-gradient(var(--sky) 1px, transparent 1.4px);
+  background-size:22px 22px; -webkit-mask:linear-gradient(180deg, #000, transparent 70%);
+          mask:linear-gradient(180deg, #000, transparent 70%);}
+.card>*{position:relative}
+.eyebrow{font-family:var(--pixel); color:var(--accent); text-transform:uppercase;
+  letter-spacing:0; display:flex; align-items:center; gap:.7em;}
+.eyebrow .live{width:.62em;height:.62em;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 .28em rgba(242,180,23,.28)}
+.h{font-family:var(--pixel); color:var(--ink); line-height:1.4; letter-spacing:0; font-weight:400}
+.h em{font-family:var(--pixel); font-style:normal; color:var(--accent)}
+.sub{font-family:var(--pixel); color:var(--ink2); line-height:1.6; letter-spacing:0}
+.sub .lead{color:var(--ink)}
+.handle{font-family:var(--pixel); color:var(--ink); font-weight:400}
+.foot{font-family:var(--pixel); color:var(--ink3); line-height:1.65; letter-spacing:0}
+
+/* the badge case: a navy panel echoing the device screen of the launch cards */
+.case{background:linear-gradient(165deg,#15294b,#0b1627);
+  box-shadow:0 40px 80px -36px rgba(14,27,51,.55), inset 0 0 0 1px rgba(255,255,255,.08);
+  display:grid; align-content:center;}
+.badge{display:flex; flex-direction:column; align-items:center; text-align:center;}
+.badge canvas{image-rendering:pixelated; filter:drop-shadow(0 3px 6px rgba(0,0,0,.45));}
+.badge .bname{font-family:var(--pixel); color:#F6D978; font-weight:400}
+.badge .bwhy{font-family:var(--pixel); color:#AFC2E4; line-height:1.55}
+.badge .brel{font-family:var(--pixel); color:var(--gold)}
+
+.card{width:1080px;height:1080px}
+
+.card{flex-direction:column; padding:74px 70px 60px; align-items:center; text-align:center}
+.eyebrow{font-size:14px; margin-bottom:22px; justify-content:center}
+.h{font-size:34px; margin-bottom:22px}
+.sub{font-size:13px; max-width:760px; margin:0 auto 34px}
+.case{width:100%}
+.handle{font-size:15px; margin-top:30px}
+.foot{position:absolute; left:0; right:0; bottom:26px; font-size:10px; padding:0 70px}
+</style></head><body>
+<div class="card">
+  <div class="h">Earn badges as you code.</div>
+  <div class="sub">Track your progress, from your first merge to 100 commits. Collect badges like a <em>Pokémon Master</em>.</div>
+  
+    <div class="case" style="grid-template-columns:repeat(4,1fr);
+      padding:48px; column-gap:30px; row-gap:34px; border-radius:28px;">
+      
+    <div class="badge" data-idx="0" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">ZEPHYR</div>
+      <div class="bwhy" style="font-size:9.5px">first commit</div>
+      
+    </div>
+    <div class="badge" data-idx="1" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">HIVE</div>
+      <div class="bwhy" style="font-size:9.5px">10 green test runs</div>
+      
+    </div>
+    <div class="badge" data-idx="2" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">PLAIN</div>
+      <div class="bwhy" style="font-size:9.5px">fix a red test, same run</div>
+      <div class="brel" style="margin-top:11px">&uarr; Raikou</div>
+    </div>
+    <div class="badge" data-idx="3" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">FOG</div>
+      <div class="bwhy" style="font-size:9.5px">first merge</div>
+      <div class="brel" style="margin-top:11px">&uarr; Suicune</div>
+    </div>
+    <div class="badge" data-idx="4" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">STORM</div>
+      <div class="bwhy" style="font-size:9.5px">a 7-day streak</div>
+      <div class="brel" style="margin-top:11px">&uarr; Entei</div>
+    </div>
+    <div class="badge" data-idx="5" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">MINERAL</div>
+      <div class="bwhy" style="font-size:9.5px">100 commits</div>
+      
+    </div>
+    <div class="badge" data-idx="6" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">GLACIER</div>
+      <div class="bwhy" style="font-size:9.5px">a clean session</div>
+      
+    </div>
+    <div class="badge" data-idx="7" data-scale="5">
+      <div class="slot" style="line-height:0; margin-bottom:11px"></div>
+      <div class="bname" style="font-size:12px; margin-bottom:6px">RISING</div>
+      <div class="bwhy" style="font-size:9.5px">100 sessions</div>
+      <div class="brel" style="margin-top:11px">&uarr; Lugia</div>
+    </div>
+    </div>
+  <div class="handle">pokemonagents.dev</div>
+  <div class="foot">A non-commercial fan project. Not affiliated with or endorsed by Nintendo, Game Freak, Creatures or The Pokémon Company.</div>
+</div>
+
+<script>
+const SHEET = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAACwAgAAAABpNKnyAAABzElEQVR42n2RwWrbQBCGf1s1OL44xdU9UCTifYcimzyAXSQtdU6FuqLWM/TQ0gfwIZZIfCrYCtY+hTAYbF3yKo5zFWxnVwpJA7YOH6vdmW9nZiEBib0QbbR49BdWcPcFdnB3C/vrGeHb7giMjOAUt7hwiiY+SrmFIWUGuW9LlFKgjYPwB8hT00WeNFywpOGBpSbheuihy3sfsOO9DvLroVsG74XfhmwNZaUqHMJhQMhvCGwpUYjUoWBBZiFuwIRYltC/+kCH6OAy7XHwrMoMErCVFkyR388XyON4Acaj5VvVa1+kfL9IsF4o1SVBZk7pk2xF0jgk6SgdYBckLqx5NIYd+jN0U06rZETmKJiB+XOPmp64eBwlZA6U2fSq0vToMrYykP+uL7Dt1zpo9mvnuOjX3r2C5X+mFd4r0DjP/OE5tkAHmx5cZKZvlKqy6fWVatpzsI4nV2Ah92Dffx/DCvkSNg9VpapItWfHkzG6IZ+VwTpNC7SqfNWoPsU6qv+B6QMVojohaREml9Ve5sPA3qSMwmqSxWqSpaGq2hjP70tfVeTTgzp4Ipg/FX6chBrYxv3vabXqje8Fh+kpaMsLjvoe1JWf1OXdkzhS3z8AfZB2RTbywwAAAABJRU5ErkJggg==";
+const PAL = [[248,248,248],[248,208,64],[184,112,24],[40,24,8]];
+const ORDER = [0,1,2,3,4,5,6,7];  // index of each badge id in the sheet (BADGE_ORDER in screens.mjs)
+function shadeAt(d,w,x,y){return 3 - Math.round(d[(y*w+x)*4]/85);}
+const img = new Image();
+img.onload = () => {
+  const src = document.createElement('canvas');
+  src.width = img.width; src.height = img.height;
+  const sctx = src.getContext('2d'); sctx.imageSmoothingEnabled=false;
+  sctx.drawImage(img,0,0);
+  const d = sctx.getImageData(0,0,img.width,img.height).data;
+  document.querySelectorAll('.badge[data-idx]').forEach(el => {
+    const idx = ORDER[+el.dataset.idx];
+    const scale = +el.dataset.scale || 6;
+    const c = document.createElement('canvas');
+    c.width = 16*scale; c.height = 16*scale;
+    const ctx = c.getContext('2d'); ctx.imageSmoothingEnabled=false;
+    for (let y=0;y<16;y++) for (let x=0;x<16;x++){
+      const s = shadeAt(d, img.width, x, idx*16 + y);
+      if (s===0) continue;                 // colour 0 is transparent on the case
+      ctx.fillStyle = `rgb(${PAL[s].join(',')})`;
+      ctx.fillRect(x*scale, y*scale, scale, scale);
+    }
+    el.querySelector('.slot').appendChild(c);
+  });
+  document.documentElement.dataset.badgesReady = '1';
+};
+img.src = SHEET;
+</script>
+
+</body></html>
