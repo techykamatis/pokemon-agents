@@ -18,9 +18,15 @@ marketing/
 │   ├── stories/            9:16 story card
 │   ├── motion/             badge-card gif + full demo gif (dummy-data capture)
 │   └── copy.md
+├── evolution/              evolution campaign — the four ways, and CHARMELEON -> CHARIZARD
+│   ├── posts/              twitter-x 16:9, instagram 1:1, portrait 4:5
+│   ├── stories/            9:16 story card
+│   ├── motion/             device-framed evolution gif + the raw capture
+│   └── copy.md
 └── _build/                 source HTML + Playwright render scripts (one dir per campaign)
     ├── launch/
-    └── badges/
+    ├── badges/
+    └── evolution/
 ```
 
 ## Rebuilding
@@ -32,7 +38,19 @@ rendered to PNG with Playwright at exact canvas sizes:
 cd _build/badges
 python3 gen_badges.py     # writes the card-*.html files
 node render.mjs           # screenshots each to ../../badges/{posts,stories}/
+
+cd _build/evolution
+python3 gen_evolution.py  # writes the card-*.html files, incl. the reel background
+node render.mjs           # screenshots each to ../../evolution/{posts,stories}/
+node frame-gif.mjs        # puts the recording inside the device -> ../../evolution/motion/
 ```
+
+`frame-gif.mjs` is the evolution set's equivalent of the launch reel: it renders
+`card-evolution-reel-bg.html`, measures where that card's screen actually sits, builds a
+rounded-rect alpha mask at exactly that size, and composites
+`motion/pokemon-agents-evolution-raw.gif` into it with ffmpeg. The measured rect and mask are
+written beside it (`evolution-screen-rect.json`, `evolution-screen-mask.png`) so a change to the
+card's padding or radius is picked up automatically rather than hand-tuned.
 
 ## Motion / gifs
 
@@ -43,7 +61,14 @@ real sessions), then cropped to the screen and encoded with ffmpeg:
 ```
 npm run demo                      # full ~42s product loop -> artifacts/demo/pokemon-agents-demo.gif
 node scripts/demo-badges.mjs      # ~10s badge-card loop   -> artifacts/demo/pokemon-agents-badges.gif
+node scripts/demo-evolution.mjs   # ~13s evolution         -> artifacts/demo/pokemon-agents-evolution.gif
 ```
+
+`demo-evolution.mjs` stages a project's Pokémon one level short of evolving and then applies
+real tool-call events through the normal pipeline until the XP crosses the threshold, so the
+evolution on screen is the game's own rule firing rather than a scripted animation. Two things
+it has to work around: `patch()` raises XP to match a level but never lowers it, and evolution
+is only checked when a level actually changes — so the hero must never be staged high first.
 
 Copy the result into the relevant campaign's `motion/` folder. The gifs are a
 screen capture of Nintendo's artwork, so they are campaign assets here but are
