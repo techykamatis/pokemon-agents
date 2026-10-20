@@ -4,6 +4,21 @@
 # Screenshots, recordings and scratch output from the e2e and demo runs.
 artifacts/
 
+# Rendered marketing deliverables (posts, stories, reels, motion) and build scratch are
+# generated from the sources under marketing/_build/ — see marketing/README.md — and, like
+# all art in this repo, are never committed. The text sources (*.md, *.html, *.mjs, *.py,
+# *.json) stay tracked; only the rendered binaries are ignored.
+marketing/**/*.png
+marketing/**/*.gif
+marketing/**/*.jpg
+marketing/**/*.jpeg
+marketing/**/*.webp
+marketing/**/*.avif
+marketing/**/*.bmp
+marketing/**/*.mp4
+marketing/**/*.mov
+marketing/**/*.webm
+
 node_modules/
 *.log
 .env
