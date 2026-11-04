@@ -16,7 +16,7 @@
     "demo": "node scripts/demo.mjs"
   },
   "dependencies": {
-    "ws": "^8.18.0"
+    "ws": "^8.22.1"
   },
   "devDependencies": {
     "playwright": "^1.64.0"
